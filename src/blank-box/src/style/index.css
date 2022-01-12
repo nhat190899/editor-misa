@@ -1,0 +1,81 @@
+.blank-box-item {
+  position: relative;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 5px 28px 5px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  height: 30px;
+  box-sizing: border-box;
+  background-color: #ebedf5;
+  outline-color: transparent !important;
+}
+
+
+.blank-box-edit {
+  padding: 5px 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  height: 30px;
+  box-sizing: border-box;
+  min-width: 10px;
+  display: inline-block;
+  border: 1px solid #ebedf5 !important;
+  outline-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-right: 0px !important;
+}
+
+.blank-box {
+  position: relative;
+  padding: 4px 4px 0px 4px;
+  border: 1px solid #b6b9ce;
+  min-width: 200px;
+  border-radius: 10px;
+  min-height: 40px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-top-right-radius: 0;
+  outline-color: transparent!important;
+}
+
+
+
+.blank-box-close {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  background-color: #ff6161;
+}
+
+.blank-box-close:hover{
+  background-color: #f51f1f;
+}
+
+.blank-item-close {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translate(0, -50%);
+}
+.blank-item-close:hover {
+  background-color: #ccc;
+}
+.is-student-box{
+  border-radius: 10px;
+}
+
+.is-student-item {
+  padding: 5px 8px 5px 8px !important;
+  margin-right: 0px !important;
+}
+
+.is-student-edit{
+}
