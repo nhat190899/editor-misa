@@ -96,7 +96,7 @@ import BlankBox from "./blank-box/src/index";
 import Placeholder from "./place-holder/index";
 import Nhat from "./nhat/index";
 import SimpleBox from "./simple-box/index";
-
+import Mention from "./mention/src/mention.js"
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
@@ -182,6 +182,7 @@ Editor.builtinPlugins = [
   Placeholder,
   Nhat,
   SimpleBox,
+  Mention
 ];
 
 export default Editor;

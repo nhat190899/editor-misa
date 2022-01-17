@@ -187,6 +187,15 @@
 
 	<script>ClassicEditor
 			.create(document.querySelector('.editor2'), {
+				// plugins: [ Mention],
+				mention: {
+ 					feeds: [
+ 						{
+ 							marker: '@',
+ 							feed: [ '@Barney', '@Lily', '@Marshall', '@Robin', '@Ted' ]
+ 						}
+ 					]
+ 				},
 				toolbar: {
 					items: [
 						'bold',
