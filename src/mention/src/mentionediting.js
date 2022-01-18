@@ -118,7 +118,6 @@ function preventPartialMentionDowncast( dispatcher ) {
 
 		const start = data.range.start;
 		const textNode = start.textNode || start.nodeAfter;
-
 		if ( textNode.data != mention._text ) {
 			// Consume item to prevent partial mention conversion.
 			conversionApi.consumable.consume( data.item, evt.name );
@@ -135,10 +134,9 @@ function createViewMentionElement( mention, { writer } ) {
 	if ( !mention ) {
 		return;
 	}
-
 	const attributes = {
 		class: 'mention',
-		'data-mention': mention.id
+		'data-mention': mention.id.substr(1) // THNhat fix here
 	};
 	const options = {
 		id: mention.uid,
