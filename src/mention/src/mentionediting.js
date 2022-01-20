@@ -9,7 +9,11 @@
 
 import { Plugin } from 'ckeditor5/src/core';
 import { uid } from 'ckeditor5/src/utils';
-
+import Widget from "@ckeditor/ckeditor5-widget/src/widget";
+import {
+	toWidget,
+	toWidgetEditable,
+  } from "@ckeditor/ckeditor5-widget/src/utils";
 import MentionCommand from './mentioncommand';
 
 /**
@@ -22,6 +26,9 @@ import MentionCommand from './mentioncommand';
  * @extends module:core/plugin~Plugin
  */
 export default class MentionEditing extends Plugin {
+	static get requires() {
+		return [Widget];
+	  }
 	/**
 	 * @inheritDoc
 	 */
@@ -37,6 +44,8 @@ export default class MentionEditing extends Plugin {
 		const model = editor.model;
 		const doc = model.document;
 
+		this._defineSchema();
+    	this._defineConverters();
 		// Allow the mention attribute on all text nodes.
 		model.schema.extend( '$text', { allowAttributes: 'mention' } );
 
@@ -68,7 +77,6 @@ export default class MentionEditing extends Plugin {
 					// The mention feature expects that the mention attribute value
 					// in the model is a plain object with a set of additional attributes.
 					// In order to create a proper object use the toMentionAttribute() helper method:
-					debugger
 					const mentionAttribute = editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, {
 						// Add any other properties that you need.
 						// link: viewItem.getAttribute( 'href' ),
@@ -90,7 +98,6 @@ export default class MentionEditing extends Plugin {
 				if ( !modelAttributeValue ) {
 					return;
 				}
-				debugger
 				return writer.createAttributeElement( 'span', {
 					class: 'mention',
 					'data-mention': modelAttributeValue.name,
@@ -111,6 +118,82 @@ export default class MentionEditing extends Plugin {
 		doc.registerPostFixer( writer => selectionMentionAttributePostFixer( writer, doc ) );
 
 		editor.commands.add( 'mention', new MentionCommand( editor ) );
+	}
+
+	_defineConverters() {
+		const conversion = this.editor.conversion;
+	
+		// <simpleBox> converters
+		conversion.for("upcast").elementToElement({
+		  view: {
+			name: "span",
+			classes: "mention",
+		  },
+		  model: (viewElement, { writer: modelWriter }) => {
+			const dataMention = viewElement.getAttribute("data-mention");
+			const dataUserId = viewElement.getAttribute("data-user-id");
+			const blankBox = modelWriter.createElement('mention',{
+			  'data-mention': dataMention,
+			  'data-user-id': dataUserId
+			});
+			return blankBox;
+		  }
+		});
+		conversion.for("dataDowncast").elementToElement({
+		  model: 'mention',
+		  view: (modelElement, { writer: viewWriter }) => {
+	
+			return viewWriter.createContainerElement("span",
+			{
+			  class: "mention",
+			  'data-mention' : modelElement.getAttribute('data-mention'),
+			  'data-user-id' : modelElement.getAttribute('data-user-id')
+			}
+			);
+		  },
+		});
+		conversion.for("editingDowncast").elementToElement({
+		  model: "mention",
+		  view: (modelElement, { writer: viewWriter }) => {
+			let itemClass = "mention"
+			debugger
+			const placeholderView = viewWriter.createContainerElement("span", {
+			  class: itemClass,
+			  'data-mention' : modelElement.getAttribute('data-mention'),
+			  'data-user-id' : modelElement.getAttribute('data-user-id')
+			});
+	
+			// const innerText = viewWriter.createText(
+			//   modelElement.getAttribute('data-mention')
+			// );
+			// const position = viewWriter.createPositionAt(placeholderView, 0);
+			// viewWriter.insert(position, innerText);
+	
+			return toWidget(placeholderView, viewWriter);
+		  }
+		});
+	}
+
+	_defineSchema() {
+		const schema = this.editor.model.schema;
+		schema.register("mention", {
+		  // Allow wherever text is allowed:
+		  allowWhere: "$text",
+	
+		  // The placeholder will act as an inline node:
+		  isInline: true,
+	
+		  // The inline widget is self-contained so it cannot be split by the caret and it can be selected:
+		  isObject: false,
+	
+		  // The inline widget can have the same attributes as text (for example linkHref, bold).
+		  allowAttributesOf: "$text",
+	
+		  // Allow content which is allowed in blocks (i.e. text with attributes).
+		  allowContentOf: "$block",
+	
+		  allowAttributes: ['data-user-id','data-mention'],
+		});
 	}
 }
 
