@@ -441,7 +441,6 @@ function savePreSelector(editableElement){
 function savePreSelectorId(Id){
   pointerBlankId = Id;
   savePreSelector(editAbleElementMap[Id])
-  debugger
 }
 
 
@@ -461,7 +460,6 @@ function focusBlankEditById(dataId) {
   setTimeout(() => {
     document.querySelector(selector).focus();
   });
-  debugger
   savePreSelectorId(dataId)
 }
 

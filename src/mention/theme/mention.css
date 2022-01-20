@@ -3,5 +3,7 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 .mention{
-    background-color: #b1b1e3;
+    /* background-color: #b1b1e3; */
+    color: #333;
+    font-weight: 600;
 }

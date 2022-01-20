@@ -79,10 +79,11 @@ export default class MentionCommand extends Command {
 
 		const mentionData = typeof options.mention == 'string' ? { id: options.mention } : options.mention;
 		const mentionID = mentionData.id;
+		const mentionName = mentionData.name
 
 		const range = options.range || selection.getFirstRange();
 
-		let mentionText = options.text || mentionID;
+		let mentionText = options.text || mentionName;
 
 		const mention = _addMentionAttributes( { _text: mentionText, id: mentionID }, mentionData );
 
