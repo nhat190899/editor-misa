@@ -233,7 +233,6 @@ export default class MentionUI extends Plugin {
 
 			const view = this._renderItem( item, marker );
 			view.delegate( 'execute' ).to( listItemView );
-
 			listItemView.children.add( view );
 			listItemView.item = item;
 			listItemView.marker = marker;
@@ -517,7 +516,7 @@ export default class MentionUI extends Plugin {
 		const editor = this.editor;
 
 		let view;
-		let label = item.id;
+		let label = item.name; //THNhat fix here (item.id)
 
 		const renderer = this._getItemRenderer( marker );
 

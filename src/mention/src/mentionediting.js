@@ -42,24 +42,70 @@ export default class MentionEditing extends Plugin {
 
 		// Upcast conversion.
 		editor.conversion.for( 'upcast' ).elementToAttribute( {
+			// view: {
+			// 	name: 'span',
+			// 	key: 'data-mention',
+			// 	classes: 'mention'
+			// },
+			// model: {
+			// 	key: 'mention',
+			// 	value: viewElement => _toMentionAttribute( viewElement )
+			// }
+
 			view: {
-				name: 'span',
+				name: 'a',
 				key: 'data-mention',
-				classes: 'mention'
+				classes: 'mention',
+				attributes: {
+					// href: true,
+					'data-user-id': true,
+					'data-mention':true
+				}
 			},
 			model: {
 				key: 'mention',
-				value: viewElement => _toMentionAttribute( viewElement )
-			}
+				value: viewItem => {
+					// The mention feature expects that the mention attribute value
+					// in the model is a plain object with a set of additional attributes.
+					// In order to create a proper object use the toMentionAttribute() helper method:
+					debugger
+					const mentionAttribute = editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, {
+						// Add any other properties that you need.
+						// link: viewItem.getAttribute( 'href' ),
+						userId: viewItem.getAttribute( 'data-user-id' )
+					} );
+	
+					return mentionAttribute;
+				}
+			},
+			converterPriority: 'high'
 		} );
 
 		// Downcast conversion.
 		editor.conversion.for( 'downcast' ).attributeToElement( {
 			model: 'mention',
-			view: createViewMentionElement
+			// view: createViewMentionElement
+			view: ( modelAttributeValue, { writer } ) => {
+				// Do not convert empty attributes (lack of value means no mention).
+				if ( !modelAttributeValue ) {
+					return;
+				}
+				debugger
+				return writer.createAttributeElement( 'span', {
+					class: 'mention',
+					'data-mention': modelAttributeValue.name,
+					'data-user-id': modelAttributeValue.userId
+					// 'href': modelAttributeValue.link
+				}, {
+					// Make mention attribute to be wrapped by other attribute elements.
+					priority: 20,
+					// Prevent merging mentions together.
+					id: modelAttributeValue.uid
+				} );
+			},
+			converterPriority: 'high'
 		} );
 		editor.conversion.for( 'downcast' ).add( preventPartialMentionDowncast );
-
 		doc.registerPostFixer( writer => removePartialMentionPostFixer( writer, doc, model.schema ) );
 		doc.registerPostFixer( writer => extendAttributeOnMentionPostFixer( writer, doc ) );
 		doc.registerPostFixer( writer => selectionMentionAttributePostFixer( writer, doc ) );
@@ -136,7 +182,7 @@ function createViewMentionElement( mention, { writer } ) {
 	}
 	const attributes = {
 		class: 'mention',
-		'data-mention': mention.id.substr(1) // THNhat fix here
+		'data-mention': mention.id // THNhat fix here
 	};
 	const options = {
 		id: mention.uid,
