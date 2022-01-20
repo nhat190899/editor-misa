@@ -20,8 +20,8 @@
 
 	/* Prevent unnecessary vertical scrollbar in Safari
 	https://github.com/ckeditor/ckeditor5-mention/issues/41 */
-	& > .ck-list__item {
+	/* & > .ck-list__item {
 		overflow: hidden;
 		flex-shrink: 0;
-	}
+	} */
 }
