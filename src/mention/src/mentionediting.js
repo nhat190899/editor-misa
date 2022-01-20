@@ -90,9 +90,10 @@ export default class MentionEditing extends Plugin {
 				if ( !modelAttributeValue ) {
 					return;
 				}
+				debugger
 				return writer.createAttributeElement( 'span', {
 					class: 'mention',
-					'data-mention': modelAttributeValue.id,
+					'data-mention': modelAttributeValue.name,
 					'data-user-id': modelAttributeValue.userId
 					// 'href': modelAttributeValue.link
 				}, {

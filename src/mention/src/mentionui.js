@@ -233,7 +233,6 @@ export default class MentionUI extends Plugin {
 
 			const view = this._renderItem( item, marker );
 			view.delegate( 'execute' ).to( listItemView );
-			debugger
 			listItemView.children.add( view );
 			listItemView.item = item;
 			listItemView.marker = marker;

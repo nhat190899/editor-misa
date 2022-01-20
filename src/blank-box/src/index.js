@@ -144,6 +144,7 @@ class BlankBoxItemEditing extends Plugin {
    */
   _clickHandler(element, event) {
     const { editor } = this;
+    debugger
     if(pointerBlankId)
       if(!element.classList.contains(CLS_BLANK_EDIT_NAME) || pointerBlankId !== element.getAttribute(ATTRIBUTE_DATA_ID)) completeAnswer(preViewElement)
     pointerBlankId = null
@@ -236,6 +237,7 @@ class BlankBoxItemEditing extends Plugin {
 
   _defineConverters() {
     const editor = this.editor;
+    debugger
     const conversion = editor.conversion;
 
     conversion.for("upcast").elementToElement({
