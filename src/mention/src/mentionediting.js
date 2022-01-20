@@ -57,8 +57,9 @@ export default class MentionEditing extends Plugin {
 				key: 'data-mention',
 				classes: 'mention',
 				attributes: {
-					href: true,
-					'data-user-id': true
+					// href: true,
+					'data-user-id': true,
+					'data-mention':true
 				}
 			},
 			model: {
@@ -67,9 +68,10 @@ export default class MentionEditing extends Plugin {
 					// The mention feature expects that the mention attribute value
 					// in the model is a plain object with a set of additional attributes.
 					// In order to create a proper object use the toMentionAttribute() helper method:
-					const mentionAttribute = editor.plugins.get( 'Mention' )._toMentionAttribute( viewItem, {
+					debugger
+					const mentionAttribute = editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, {
 						// Add any other properties that you need.
-						link: viewItem.getAttribute( 'href' ),
+						// link: viewItem.getAttribute( 'href' ),
 						userId: viewItem.getAttribute( 'data-user-id' )
 					} );
 	
@@ -88,7 +90,6 @@ export default class MentionEditing extends Plugin {
 				if ( !modelAttributeValue ) {
 					return;
 				}
-	
 				return writer.createAttributeElement( 'span', {
 					class: 'mention',
 					'data-mention': modelAttributeValue.id,
@@ -104,7 +105,6 @@ export default class MentionEditing extends Plugin {
 			converterPriority: 'high'
 		} );
 		editor.conversion.for( 'downcast' ).add( preventPartialMentionDowncast );
-
 		doc.registerPostFixer( writer => removePartialMentionPostFixer( writer, doc, model.schema ) );
 		doc.registerPostFixer( writer => extendAttributeOnMentionPostFixer( writer, doc ) );
 		doc.registerPostFixer( writer => selectionMentionAttributePostFixer( writer, doc ) );
