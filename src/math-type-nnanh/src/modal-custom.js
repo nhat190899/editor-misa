@@ -173,12 +173,15 @@ export default class ModalDialog {
    */
   submitAction(mathField, event) {
     const { editor } = this;
+    const oldData = editor.getData();
+    
     const mathml = mathField.latex();
     // This returns the value returned by the callback function (writer => {...})
     if (mathml == null || mathml == "" || mathml == undefined) {
     } else {
       editor.model.change((writer) => {
         const options = {};
+        debugger
         options[mathAttributeName] = mathml;
         const modelElementNew = writer.createElement(
           mathComponentName,
@@ -210,13 +213,21 @@ export default class ModalDialog {
       });
     }
 
+    if(!oldData.length){
+      editor.model.change(writer => {
+        writer.setSelection(editor.model.document.getRoot(), 'end');
+      });
+    }
     this.close();
     editor.editing.view.focus();
   }
 
   cancelAction() {
+  
     this.close();
+    editor.editing.view.focus();
   }
+
 
   close() {
     const me = this;
