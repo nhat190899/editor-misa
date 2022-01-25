@@ -3,7 +3,7 @@ import { mathClassName, mathAttributeName, mathComponentName } from "./config";
 import MathQuill from "./lib/mathquill.min";
 
 const modalDialogContainer = "nnanh_modal_dialogContainer";
-
+const overlayClass = 'mathtype_overlay';
 /**
  * @typedef {Object} DeviceProperties
  * @property {String} DeviceProperties.orientation - Indicates of the orientation of the device.
@@ -38,6 +38,10 @@ export default class ModalDialog {
       me.container.style.display = "block";
     } else {
       me.create();
+    }
+    const overlayEl = document.querySelector(`.${overlayClass}`)
+    if(overlayEl){
+      overlayEl.style.display = 'block'
     }
     me.mathField.latex(me.getLatexSelection());
     me.mathField.focus();
@@ -90,6 +94,7 @@ export default class ModalDialog {
     const mathFieldId = me.getElementId(mathFieldCls);
 
     const mathToolbarCls = "math-nnanh-toolbar";
+    
 
     container.insertAdjacentHTML(
       "beforeend",
@@ -117,6 +122,9 @@ export default class ModalDialog {
         </div>
       </div>`
     );
+    
+
+    document.querySelector('body').insertAdjacentHTML('beforeend', `<div class="${overlayClass}"></div>`)
 
     me.createToolbar(container.querySelector("." + mathToolbarCls));
 
@@ -181,7 +189,7 @@ export default class ModalDialog {
     } else {
       editor.model.change((writer) => {
         const options = {};
-        debugger
+        
         options[mathAttributeName] = mathml;
         const modelElementNew = writer.createElement(
           mathComponentName,
@@ -223,7 +231,7 @@ export default class ModalDialog {
   }
 
   cancelAction() {
-  
+    const { editor } = this;
     this.close();
     editor.editing.view.focus();
   }
@@ -231,7 +239,13 @@ export default class ModalDialog {
 
   close() {
     const me = this;
+    
+
     me.container.style.display = "none";
+    const overlayEl = document.querySelector(`.${overlayClass}`)
+    if(overlayEl){
+      overlayEl.style.display = 'none'
+    }
     me.mathField.latex("");
   }
 
