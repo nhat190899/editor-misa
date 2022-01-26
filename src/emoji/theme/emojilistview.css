@@ -1,0 +1,30 @@
+.ck-emoji__actions  .ck-button {
+    font-size: 20px;
+    padding: 0.3em 0.5em 0;
+    border:0;
+    box-sizing: border-box !important;
+    /* border-radius: 50px !important; */
+    /* outline-color: unset !important ; */
+}
+
+.ck-emoji__actions  .ck-button:focus, .ck-emoji__actions  .ck-button:active {
+    border:none !important;
+    outline-color: unset !important ;
+    box-shadow: none !important;
+}
+.tab-content{
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 1px gray !important;
+}
+.horizontal-line{
+    width: 100%;
+    background-color: #ded6d6;
+    height: 1px;
+}
+
+.character-type__active{
+    box-sizing: border-box !important;
+    /* background-color: #d9d9d9 !important; */
+    border-bottom: solid 2px blue !important;
+}

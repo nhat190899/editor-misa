@@ -48,6 +48,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "@phudak/ckeditor5-emoji": "^1.0.1",
     "jquery": "^3.6.0",
     "mathjax": "^3.2.0",
     "mathquill": "^0.10.1-a",

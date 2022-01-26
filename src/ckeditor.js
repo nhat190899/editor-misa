@@ -95,60 +95,20 @@ import BlankBox from "./blank-box/src/index";
 
 import Placeholder from "./place-holder/index";
 import Mention from "./mention/src/mention.js"
+import Emoji from "./emoji/src/emoji.js"
+import EmojiPeople from "./emoji/src/emoji-people";
+import EmojiNature from "./emoji/src/emoji-nature";
+import EmojiFood from "./emoji/src/emoji-food";
+import EmojiActivity from "./emoji/src/emoji-activity";
+import EmojiObjects from "./emoji/src/emoji-objects";
+import EmojiPlaces from "./emoji/src/emoji-places";
+import EmojiSymbols from "./emoji/src/emoji-symbols";
+// import EmojiFlags from "./emoji/src/emoji-flags";
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
     Alignment,
-  //   AutoImage,
-  //   AutoLink,
-  //   Bold,
-  //   CloudServices,
-  //   EasyImage,
-  //   Essentials,
-  //   FindAndReplace,
-  //   FontColor,
-  //   FontFamily,
-  //   FontSize,
-  //   Heading,
-  //   Highlight,
-  //   HorizontalLine,
-  //   Image,
-  //   ImageCaption,
-  //   ImageInsert,
-  //   ImageResize,
-  //   ImageStyle,
-  //   ImageToolbar,
-  //   ImageUpload,
-  //   Indent,
-  //   IndentBlock,
-  //   Italic,
-  //   Link,
-  //   LinkImage,
-  //   List,
-  //   MediaEmbed,
-  //   MediaEmbedToolbar,
-  //   PageBreak,
-  //   Paragraph,
-  //   PasteFromOffice,
-  //   SourceEditing,
-  //   SpecialCharacters,
-  //   SpecialCharactersArrows,
-  //   SpecialCharactersCurrency,
-  //   SpecialCharactersEssentials,
-  //   SpecialCharactersLatin,
-  //   SpecialCharactersMathematical,
-  //   SpecialCharactersText,
-  //   StandardEditingMode,
-  //   Strikethrough,
-  //   Table,
-  //   TableCaption,
-  //   TableCellProperties,
-  //   TableProperties,
-  //   TableToolbar,
-  //   Underline,
-  //   WordCount,
-
   Bold,
   CloudServices,
   EasyImage,
@@ -178,7 +138,16 @@ Editor.builtinPlugins = [
   PasteIgnoreImage,
   BlankBox,
   Placeholder,
-  Mention
+  Mention,
+  Emoji,
+  EmojiPeople,
+  EmojiNature,
+  EmojiFood,
+  EmojiActivity,
+  EmojiObjects,
+  EmojiPlaces,
+  EmojiSymbols
+  // EmojiFlags
 ];
 
 export default Editor;
