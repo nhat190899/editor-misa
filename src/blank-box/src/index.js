@@ -430,8 +430,7 @@ function completeAnswer(viewElement){
       writer.remove(modelBlankEdit);
       return modelBlankItem;
     });
-}
-  
+  }
 }
 
 function savePreSelector(editableElement){
