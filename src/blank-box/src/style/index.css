@@ -68,14 +68,3 @@
 .blank-item-close:hover {
   background-color: #ccc;
 }
-.is-student-box{
-  border-radius: 10px;
-}
-
-.is-student-item {
-  padding: 5px 8px 5px 8px !important;
-  margin-right: 0px !important;
-}
-
-.is-student-edit{
-}

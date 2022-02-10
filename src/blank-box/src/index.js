@@ -34,7 +34,7 @@ const ATTRIBUTE_PARENT_ID = "parent-id";
 
 const ATTRIBUTE_BLANK_ITEM_DATA_TEXT = "data-text";
 
-var pointerBlankId = null
+var pointerBlankId = null  // Id của blank-box-edit đang được trỏ
 var preViewElement = null
 var editorWraper = null
 var newEditId = null
@@ -144,10 +144,14 @@ class BlankBoxItemEditing extends Plugin {
    */
   _clickHandler(element, event) {
     const { editor } = this;
-    if(pointerBlankId)
-      if(!element.classList.contains(CLS_BLANK_EDIT_NAME) || pointerBlankId !== element.getAttribute(ATTRIBUTE_DATA_ID)) completeAnswer(preViewElement)
-    pointerBlankId = null
+    if(getPointerBlankId())
+      if(!element.classList.contains(CLS_BLANK_EDIT_NAME) || getPointerBlankId !== element.getAttribute(ATTRIBUTE_DATA_ID))
+          completeAnswer(preViewElement)
+
+    setPointerBlankId(null)
+
     if(element.classList.contains(CLS_SCHEMA_BLANK)) focusBlankEditByParentId(element.getAttribute(ATTRIBUTE_DATA_ID))
+
     if(element.classList.contains(CLS_BLANK_EDIT_NAME)) {
       savePreSelectorId(element.getAttribute(ATTRIBUTE_DATA_ID))
     }
@@ -399,14 +403,15 @@ class InsertBlankBoxCommand extends Command {
 
 }
 
-
 function completeAnswer(viewElement){
+  console.log("blank-box completeAnswer")
   const editor = editorWraper;
   const blankEditId = generateBlankEditId();
   if(!viewElement) viewElement = editor.editing.view.document.selection.editableElement;
   if(viewElement._children.length > 0){
     editor.model.change((writer) => {
       const modelBlankEdit = editor.editing.mapper.toModelElement(viewElement);
+      console.log(modelBlankEdit,editor,viewElement)
       const firstChildElement = viewElement.getChild(0);
       const textData = firstChildElement._textData.trim();
       let modelBlankItem;
@@ -438,7 +443,7 @@ function savePreSelector(editableElement){
 }
 
 function savePreSelectorId(Id){
-  pointerBlankId = Id;
+  setPointerBlankId(Id)
   savePreSelector(editAbleElementMap[Id])
 }
 
@@ -488,4 +493,11 @@ function createBlankBox(writer) {
   return blankBox;
 }
 
+function setPointerBlankId(_pointerBlankId){
+  pointerBlankId = _pointerBlankId
+}
+
+function getPointerBlankId(){
+  return pointerBlankId;
+}
 export default BlankBox;
