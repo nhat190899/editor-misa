@@ -181,7 +181,6 @@ export default class ModalDialog {
     } else {
       editor.model.change((writer) => {
         const options = {};
-        debugger
         options[mathAttributeName] = mathml;
         const modelElementNew = writer.createElement(
           mathComponentName,

@@ -156,7 +156,6 @@ export default class MentionEditing extends Plugin {
 		  model: "mention",
 		  view: (modelElement, { writer: viewWriter }) => {
 			let itemClass = "mention"
-			debugger
 			const placeholderView = viewWriter.createContainerElement("span", {
 			  class: itemClass,
 			  'data-mention' : modelElement.getAttribute('data-mention'),

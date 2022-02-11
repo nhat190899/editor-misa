@@ -85,7 +85,7 @@ class BlankBoxUI extends Plugin {
   init() {
     console.log("BlankBoxUI#init() got called");
     const { editor } = this;
-    if(!editorWraper) editorWraper = editor
+    // if(!editorWraper) editorWraper = editor
     const t = editor.t;
     editor.ui.componentFactory.add(COMPONENT_NAME, (locale) => {
       const buttonView = new ButtonView(locale);
@@ -144,6 +144,7 @@ class BlankBoxItemEditing extends Plugin {
    */
   _clickHandler(element, event) {
     const { editor } = this;
+    setEditorWraper(editor)
     if(getPointerBlankId())
       if(!element.classList.contains(CLS_BLANK_EDIT_NAME) || getPointerBlankId !== element.getAttribute(ATTRIBUTE_DATA_ID))
           completeAnswer(preViewElement)
@@ -405,6 +406,7 @@ class InsertBlankBoxCommand extends Command {
 
 function completeAnswer(viewElement){
   console.log("blank-box completeAnswer")
+  debugger
   const editor = editorWraper;
   const blankEditId = generateBlankEditId();
   if(!viewElement) viewElement = editor.editing.view.document.selection.editableElement;
@@ -499,5 +501,9 @@ function setPointerBlankId(_pointerBlankId){
 
 function getPointerBlankId(){
   return pointerBlankId;
+}
+
+function setEditorWraper(editor){
+  editorWraper = editor
 }
 export default BlankBox;

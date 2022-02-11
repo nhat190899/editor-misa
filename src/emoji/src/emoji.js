@@ -148,7 +148,6 @@ export default class Emoji extends Plugin {
 
 		// Update the grid of special characters when a user changed the character group.
 		navigationView.on( 'execute', () => {
-			debugger
 			this._updateGrid( navigationView.currentGroupName, gridView );
 		} );
 
