@@ -55,7 +55,6 @@ export default class EmojiCharactersNavigationView extends FormHeaderView {
 		this.emojiButtonSymbolsViews = new ViewCollection( locale );
 		this.emojiButtonObjectsViews = new ViewCollection( locale );
 		this.emojiButtonFlagsViews = new ViewCollection( locale );
-		debugger
 
 		groupNames.forEach(emoji => {
 			if(emoji === '😃'){

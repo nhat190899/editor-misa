@@ -57,14 +57,27 @@
 						<!-- <img src="https://via.placeholder.com/1000x300/02c7cd/fff?text=Placeholder%20image" alt="CKEditor 5 rocks!"> -->
 					</div>
 					<div class="editor2 hay-cuu-lay-em">
-						<!-- <p>
-							<span class="blank-box" is-teacher="false" style="width:40px;" data-correct="[&quot;nhat&quot;,&quot;lop&quot;]"></span>
+						<p>
+							<span class="blank-box" data-id="12312" style="width:40px;" data-correct="[&quot;nhat&quot;,&quot;lop&quot;]"></span>
 						Hello Hello&nbsp;
 						<span class="math-type-nnanh" data-math-nnanh="\\frac{1}{33}">\\(\\frac{1}{33}\\)</span>
 						&nbsp;
 						<span class="math-type-nnanh" data-math-nnanh="123">\\(123\\)</span>
 						<span class="blank-box" is-teacher="false" style="width:40px;" data-correct="[&quot;nhat&quot;,&quot;lop&quot;]"></span>
-						&nbsp;</p> -->
+						&nbsp;</p>
+						<span class="mention" data-mention="nhat" data-user-id="1">ádasdasda</span>
+						<!-- <img src="https://via.placeholder.com/1000x300/02c7cd/fff?text=Placeholder%20image" alt="CKEditor 5 rocks!"> -->
+					</div>
+
+					<div class="editor2">
+						<p>
+							<span class="blank-box" data-id="12312" style="width:40px;" data-correct="[&quot;nhat&quot;,&quot;lop&quot;]"></span>
+						Hello Hello&nbsp;
+						<span class="math-type-nnanh" data-math-nnanh="\\frac{1}{33}">\\(\\frac{1}{33}\\)</span>
+						&nbsp;
+						<span class="math-type-nnanh" data-math-nnanh="123">\\(123\\)</span>
+						<span class="blank-box" is-teacher="false" style="width:40px;" data-correct="[&quot;nhat&quot;,&quot;lop&quot;]"></span>
+						&nbsp;</p>
 						<span class="mention" data-mention="nhat" data-user-id="1">ádasdasda</span>
 						<!-- <img src="https://via.placeholder.com/1000x300/02c7cd/fff?text=Placeholder%20image" alt="CKEditor 5 rocks!"> -->
 					</div>
@@ -185,19 +198,26 @@
 	<script type="text/javascript" id="MathJax-script"
 		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg-full.js"></script>
 
-	<script>ClassicEditor
-			.create(document.querySelector('.editor2'), {
+	<script>
+	let listEditor = document.querySelectorAll('.editor2')
+	listEditor.forEach(editor => {
+		setEditorConfig(editor)
+	})
+
+function setEditorConfig(editorElement){
+	ClassicEditor
+			.create(editorElement, {
 				// plugins: [ MentionCustomization],
 				mention: {
  					feeds: [
  						{
  							marker: '@',
  							feed: [
-    { id: '@Barney Stinson', userId: '1', name: 'Barney Stinson' },
-    { id: '@Lily Aldrin', userId: '2', name: 'Lily Aldrin' },
-    { id: '@Marshall Eriksen', userId: '3', name: 'Marshall Eriksen'},
-    { id: '@Robin Scherbatsky', userId: '4', name: 'Robin Scherbatsky'},
-    { id: '@Ted Mosby', userId: '5', name: 'Ted Mosby'}
+								{ id: '@Barney Stinson', userId: '1', name: 'Barney Stinson' },
+								{ id: '@Lily Aldrin', userId: '2', name: 'Lily Aldrin' },
+								{ id: '@Marshall Eriksen', userId: '3', name: 'Marshall Eriksen'},
+								{ id: '@Robin Scherbatsky', userId: '4', name: 'Robin Scherbatsky'},
+								{ id: '@Ted Mosby', userId: '5', name: 'Ted Mosby'}
 ]
  						},
 						{
@@ -282,6 +302,7 @@
 				console.warn('Build id: j92ccuqpufj0-91dtbae0cujn');
 				console.error(error);
 			});
+}
 
 const items = [
     { id: '@Barney Stinson', userId: '1', name: 'Barney Stinson', link: 'https://www.imdb.com/title/tt0460649/characters/nm0000439' },

@@ -189,7 +189,10 @@ export default class ModalDialog {
     } else {
       editor.model.change((writer) => {
         const options = {};
+<<<<<<< HEAD
         
+=======
+>>>>>>> 875bb09445d920fe59df845d554244465b80fc23
         options[mathAttributeName] = mathml;
         const modelElementNew = writer.createElement(
           mathComponentName,
